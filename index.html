@@ -3,16 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PH Guilds - Connecting digital communities and service seekers across the Philippines.">
-    <title>PH Guilds | Community Networking</title>
+    <meta name="description" content="PH Guilds - The realm's premier network for digital artisans and service seekers.">
+    <title>PH Guilds | The Digital Guild Hall</title>
+    
+    <!-- Medieval Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=MedievalSharp&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --primary-color: #3b82f6;
-            --primary-hover: #2563eb;
-            --bg-dark: #0f172a;
-            --bg-card: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+            --wood-dark: #2a1608;
+            --wood-light: #4a3018;
+            --parchment: #f1e4c3;
+            --parchment-dark: #c1a87d;
+            --ink: #2c1a0e;
+            --gold: #d4af37;
+            --gold-dim: #997a00;
+            --blood-red: #8a0303;
         }
 
         * {
@@ -22,10 +30,40 @@
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
+            font-family: 'MedievalSharp', cursive;
+            background: linear-gradient(135deg, var(--wood-dark), var(--wood-light));
+            background-attachment: fixed;
+            color: var(--parchment);
             line-height: 1.6;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Cinzel', serif;
+            text-transform: uppercase;
+        }
+
+        /* Wood Panel Texture */
+        .wood-panel {
+            background: repeating-linear-gradient(
+                to bottom,
+                var(--wood-dark),
+                var(--wood-dark) 10px,
+                var(--wood-light) 10px,
+                var(--wood-light) 20px
+            );
+            border: 4px solid #1a0b03;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        /* Parchment Texture */
+        .parchment {
+            background-color: var(--parchment);
+            background-image: linear-gradient(rgba(193, 168, 125, 0.1) 1px, transparent 1px);
+            background-size: 100% 2em;
+            color: var(--ink);
+            box-shadow: inset 0 0 30px rgba(139, 115, 85, 0.5), 0 5px 15px rgba(0,0,0,0.5);
+            border: 1px solid var(--parchment-dark);
+            border-radius: 3px;
         }
 
         /* Navigation */
@@ -33,9 +71,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 5%;
-            background-color: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            background: rgba(26, 11, 3, 0.95);
+            border-bottom: 3px solid var(--gold-dim);
             position: fixed;
             width: 100%;
             top: 0;
@@ -43,15 +81,27 @@
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-main);
+            font-size: 1.8rem;
+            color: var(--gold);
             text-decoration: none;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
 
-        .logo span {
-            color: var(--primary-color);
+        .nav-btn {
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold-dim);
+            padding: 0.5rem 1.5rem;
+            font-family: 'Cinzel', serif;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            background: var(--gold-dim);
+            color: var(--wood-dark);
         }
 
         /* Hero Section */
@@ -62,85 +112,126 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 6rem 5% 2rem;
+            padding: 8rem 5% 4rem;
+            background: radial-gradient(circle at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(3rem, 6vw, 5rem);
+            color: var(--gold);
             margin-bottom: 1rem;
-            line-height: 1.2;
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.9);
         }
 
         .hero p {
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            color: var(--text-muted);
-            max-width: 600px;
-            margin-bottom: 2.5rem;
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            max-width: 700px;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
 
-        .btn {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 0.875rem 2rem;
-            border-radius: 8px;
+        .btn-primary {
+            background: var(--blood-red);
+            color: var(--parchment);
+            padding: 1rem 2.5rem;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
             text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.3s ease;
-            border: none;
+            border: 2px solid #5a0202;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 0 5px 15px rgba(0,0,0,0.5);
+            transition: transform 0.2s, background 0.2s;
             cursor: pointer;
-            font-size: 1rem;
         }
 
-        .btn:hover {
-            background-color: var(--primary-hover);
+        .btn-primary:hover {
+            background: #a30404;
+            transform: translateY(-2px);
         }
 
-        /* Features Section */
-        .features {
+        /* Job Board (Bounties) */
+        .bounties {
             padding: 5rem 5%;
-            background-color: var(--bg-card);
         }
 
         .section-title {
             text-align: center;
-            font-size: 2rem;
+            font-size: 2.5rem;
+            color: var(--gold);
             margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
 
-        .grid {
+        .notice-board {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
         }
 
-        .card {
-            background-color: var(--bg-dark);
+        .bounty-scroll {
             padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            transform: rotate(-1deg);
+            transition: transform 0.3s;
         }
 
-        .card h3 {
+        .bounty-scroll:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .bounty-scroll:hover {
+            transform: scale(1.05) rotate(0);
+            z-index: 10;
+        }
+
+        /* Wax Seal Effect */
+        .wax-seal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            background: var(--blood-red);
+            border-radius: 50%;
+            box-shadow: inset 0 0 10px #4a0101, 1px 2px 3px rgba(0,0,0,0.3);
+        }
+
+        .bounty-scroll h3 {
+            font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: var(--primary-color);
+            color: var(--blood-red);
+            border-bottom: 2px dashed var(--parchment-dark);
+            padding-bottom: 0.5rem;
         }
 
-        /* Join Form Section */
-        .join-section {
+        .reward {
+            font-weight: bold;
+            color: var(--wood-dark);
+            margin-top: 1.5rem;
+            display: block;
+            font-size: 1.1rem;
+        }
+
+        /* Sign the Ledger (Form) */
+        .ledger-section {
             padding: 5rem 5%;
             display: flex;
             justify-content: center;
         }
 
-        .form-container {
-            background-color: var(--bg-card);
-            padding: 3rem;
-            border-radius: 12px;
+        .ledger-book {
+            max-width: 600px;
             width: 100%;
-            max-width: 500px;
+            padding: 3rem;
+        }
+
+        .ledger-book h2 {
+            text-align: center;
+            color: var(--ink);
+            margin-bottom: 2rem;
+            font-size: 2rem;
         }
 
         .form-group {
@@ -150,108 +241,131 @@
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            color: var(--text-muted);
+            font-weight: bold;
+            color: var(--ink);
         }
 
-        .form-group input, .form-group textarea {
+        .form-group input, .form-group select {
             width: 100%;
             padding: 0.75rem;
-            border-radius: 6px;
-            border: 1px solid rgba(255,255,255,0.2);
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: inherit;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid var(--parchment-dark);
+            color: var(--ink);
+            font-family: 'MedievalSharp', cursive;
+            font-size: 1.1rem;
         }
 
-        .form-group input:focus, .form-group textarea:focus {
+        .form-group input:focus, .form-group select:focus {
             outline: none;
-            border-color: var(--primary-color);
+            border-bottom-color: var(--blood-red);
+        }
+
+        .submit-seal {
+            width: 100%;
+            margin-top: 2rem;
+            font-size: 1.2rem;
         }
 
         /* Footer */
         footer {
             text-align: center;
             padding: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: var(--text-muted);
+            background: #1a0b03;
+            color: var(--parchment-dark);
+            border-top: 2px solid var(--gold-dim);
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#" class="logo">PH<span>Guilds</span></a>
-        <a href="#join" class="btn" style="padding: 0.5rem 1.5rem;">Join the Network</a>
+        <a href="#" class="logo">PH Guilds</a>
+        <a href="#pledge" class="nav-btn">Join the Ranks</a>
     </nav>
 
     <section class="hero">
-        <h1>Connect. Build. Elevate.</h1>
-        <p>The premier networking space for digital marketers, freelancers, and creative service seekers across the Philippines.</p>
-        <a href="#join" class="btn">Become a Member</a>
+        <h1>Connect. Forge. Conquer.</h1>
+        <p>The realm's premier tavern for digital artisans, sellswords of code, and visual alchemists. Seek quests or pledge your blade.</p>
+        <a href="#bounties" class="btn-primary">View the Notice Board</a>
     </section>
 
-    <section class="features">
-        <h2 class="section-title">Why Join the Guild?</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Community Networking</h3>
-                <p>Forge meaningful connections with like-minded professionals. Share insights, collaborate on projects, and grow your local network.</p>
+    <section id="bounties" class="bounties">
+        <h2 class="section-title">Active Bounties</h2>
+        <div class="notice-board wood-panel">
+            
+            <!-- Bounty 1 -->
+            <div class="bounty-scroll parchment">
+                <div class="wax-seal"></div>
+                <h3>Scribe of the Web</h3>
+                <p><strong>Guild seeking:</strong> Code Weaver (Web Developer)</p>
+                <p>Required to forge a responsive digital grimoire (landing page) for a merchant in Cebu. Must possess knowledge of HTML, JS, and responsive wards.</p>
+                <span class="reward">Reward: 15,000 PHP</span>
             </div>
-            <div class="card">
-                <h3>Skill Exchange</h3>
-                <p>Whether you're developing web apps, designing assets, or managing digital marketing, find the exact expertise you need to level up.</p>
+
+            <!-- Bounty 2 -->
+            <div class="bounty-scroll parchment">
+                <div class="wax-seal"></div>
+                <h3>Visu-Alchemist</h3>
+                <p><strong>Guild seeking:</strong> Illustrator / Designer</p>
+                <p>A noble house requires a new heraldic crest (logo) and banners for their upcoming tournament. Mastery of vector magic required.</p>
+                <span class="reward">Reward: 8,000 PHP</span>
             </div>
-            <div class="card">
-                <h3>Service Seeking</h3>
-                <p>Easily discover trusted local talent for your next big project in a community built on reliability and quality.</p>
+
+            <!-- Bounty 3 -->
+            <div class="bounty-scroll parchment">
+                <div class="wax-seal"></div>
+                <h3>Master of Ravens</h3>
+                <p><strong>Guild seeking:</strong> Social Media Manager</p>
+                <p>Need a silver-tongued bard to manage communications across the realm. 3 moons (months) contract, weekly town crier updates.</p>
+                <span class="reward">Reward: 20,000 PHP / moon</span>
             </div>
+
         </div>
     </section>
 
-    <section id="join" class="join-section">
-        <div class="form-container">
-            <h2 style="margin-bottom: 2rem; text-align: center;">Join the Waitlist</h2>
+    <section id="pledge" class="ledger-section">
+        <div class="ledger-book parchment">
+            <h2>Pledge Your Fealty</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">Sign the ledger to join the guild waitlist and be summoned when new bounties arise.</p>
             
-            <!-- Ready for Web3Forms integration -->
-            <form id="joinForm">
+            <form id="pledgeForm">
+                <!-- Ready for Web3Forms -->
                 <!-- <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE"> -->
                 
                 <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" required placeholder="Juan Dela Cruz">
+                    <label for="name">Thy Given Name (Full Name)</label>
+                    <input type="text" id="name" name="name" required placeholder="Juan of House Dela Cruz">
                 </div>
                 
                 <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required placeholder="juan@example.com">
+                    <label for="email">Raven Destination (Email Address)</label>
+                    <input type="email" id="email" name="email" required placeholder="juan@domain.com">
                 </div>
                 
                 <div class="form-group">
-                    <label for="role">Primary Role / Skill</label>
-                    <input type="text" id="role" name="role" required placeholder="e.g. Web Developer, Digital Marketer">
+                    <label for="class">Thy Chosen Class</label>
+                    <select id="class" name="class" required>
+                        <option value="" disabled selected>Select thy mastery...</option>
+                        <option value="code">Code Weaver (Developer)</option>
+                        <option value="design">Visu-Alchemist (Designer)</option>
+                        <option value="market">Master of Coin (Marketer)</option>
+                        <option value="other">Sellsword (Other/Freelance)</option>
+                    </select>
                 </div>
 
-                <button type="submit" class="btn" style="width: 100%;">Submit Application</button>
+                <button type="submit" class="btn-primary submit-seal">Sign the Ledger</button>
             </form>
-            <p id="formStatus" style="text-align: center; margin-top: 1rem; color: #10b981; display: none;">Application received! We'll be in touch.</p>
+            <p id="formStatus" style="text-align: center; margin-top: 1rem; color: #155724; font-weight: bold; display: none;">Thy name has been recorded in the archives!</p>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 PH Guilds. All rights reserved.</p>
+        <p>&copy; 2026 PH Guilds. Forged in the fires of the web.</p>
     </footer>
 
     <script>
-        // Simple form handling logic
-        document.getElementById('joinForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Add your form submission logic here (e.g., fetch request to Web3Forms)
-            
-            this.style.display = 'none';
-            document.getElementById('formStatus').style.display = 'block';
-        });
-
-        // Smooth scrolling for anchor links
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -259,6 +373,13 @@
                     behavior: 'smooth'
                 });
             });
+        });
+
+        // Form handling mock
+        document.getElementById('pledgeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            this.style.display = 'none';
+            document.getElementById('formStatus').style.display = 'block';
         });
     </script>
 </body>
