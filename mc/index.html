@@ -1,1 +1,205 @@
-<head>this will be the index page for mc.phguilds.org</head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PH Guilds Minecraft Server - Enter the blocky realm.">
+    <title>PH Guilds MC | The Blocky Realm</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=MedievalSharp&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --wood-dark: #2a1608;
+            --wood-light: #4a3018;
+            --parchment: #f1e4c3;
+            --parchment-dark: #c1a87d;
+            --ink: #2c1a0e;
+            --gold: #d4af37;
+            --creeper-green: #3aa62c;
+            --diamond-blue: #51eeec;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'MedievalSharp', cursive;
+            background: linear-gradient(135deg, #111, #1a2421);
+            background-image: 
+                radial-gradient(circle at center, rgba(81, 238, 236, 0.05) 0%, transparent 70%),
+                linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBmaWxsPSJub25lIi8+PHBhdGggZD0iTHere is a clean, responsive landing page for the Minecraft server. It includes a dark-themed gaming aesthetic and a click-to-copy feature for the server IP address.
+
+### 1. The Landing Page Code
+
+Save this code inside your repository at `phguilds.org/mc/index.html`:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PH Guilds | Minecraft Server</title>
+    <style>
+        :root {
+            --mc-green: #5c9e31;
+            --mc-dark: #1a1a1a;
+            --mc-card: #2a2a2a;
+            --text-main: #f5f5f5;
+            --text-muted: #aaaaaa;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--mc-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 120px 20px;
+            /* Using a generic dark texture placeholder - replace with a server screenshot if you have one */
+            background: linear-gradient(rgba(26, 26, 26, 0.85), rgba(26, 26, 26, 0.95)), 
+                        url('[https://images.unsplash.com/photo-1607513746994-51f730a41d99?auto=format&fit=crop&w=1920&q=80](https://images.unsplash.com/photo-1607513746994-51f730a41d99?auto=format&fit=crop&w=1920&q=80)') center/cover;
+            border-bottom: 4px solid var(--mc-green);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        /* IP Copy Button */
+        .ip-container {
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--mc-green);
+            padding: 15px 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ip-container:hover {
+            background: rgba(92, 158, 49, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .ip-address {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--mc-green);
+        }
+
+        .ip-hint {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        /* Features Section */
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: var(--mc-card);
+            padding: 30px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .card h3 {
+            color: var(--mc-green);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .ip-address { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <h1>PH Guilds</h1>
+        <p>Survival • Economy • Community</p>
+        
+        <div class="ip-container" onclick="copyIP()" title="Click to copy IP">
+            <span class="ip-address" id="ip-text">mc.phguilds.org</span>
+            <span class="ip-hint" id="ip-hint">Click to copy server IP</span>
+        </div>
+    </header>
+
+    <section class="features">
+        <div class="card">
+            <h3>Server Rules</h3>
+            <p>Respect other players, no griefing or stealing, and keep the chat friendly. Let's build a great community together.</p>
+        </div>
+        <div class="card">
+            <h3>Server Map</h3>
+            <p>Explore our custom world. Claim your land, build your base, and establish your guild's territory.</p>
+        </div>
+        <div class="card">
+            <h3>Join the Community</h3>
+            <p>Connect your account with our Discord server to chat with players in-game, trade, and form alliances.</p>
+        </div>
+    </section>
+
+    <script>
+        function copyIP() {
+            const ip = "mc.phguilds.org";
+            navigator.clipboard.writeText(ip).then(() => {
+                const ipText = document.getElementById("ip-text");
+                const ipHint = document.getElementById("ip-hint");
+                
+                ipText.style.color = "#ffffff";
+                ipHint.innerText = "Copied to clipboard!";
+                
+                setTimeout(() => {
+                    ipText.style.color = "var(--mc-green)";
+                    ipHint.innerText = "Click to copy server IP";
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
