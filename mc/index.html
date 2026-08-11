@@ -3,30 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PH Guilds Minecraft Realm - A medieval RPG survival experience. Claim territory, build guilds, and forge your legacy.">
+    <meta name="description" content="PH Guilds Minecraft Realm - Survival, Factions, Economy & Community.">
     <title>PH Guilds MC | The Medieval Realm</title>
 
-    <!-- Medieval Fonts -->
+    <!-- Medieval & Fantasy Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=MedievalSharp&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --obsidian: #0f1217;
-            --stone-dark: #1e232a;
-            --stone-card: #282e38;
-            --wood-dark: #2a1608;
-            --wood-light: #4a3018;
-            --parchment: #f1e4c3;
-            --parchment-dark: #c1a87d;
-            --ink: #2c1a0e;
+            --wood-black: #120904;
+            --wood-dark: #231207;
+            --wood-mid: #3d2210;
+            --wood-border: #5a351b;
             --gold: #d4af37;
-            --gold-dim: #997a00;
-            --emerald: #22c55e;
-            --emerald-glow: rgba(34, 197, 94, 0.3);
+            --gold-bright: #fcd34d;
+            --parchment: #f3ebd7;
+            --parchment-dark: #ccb78f;
+            --ink: #2b1704;
+            --ink-muted: #5c3b1e;
+            --redstone: #991b1b;
+            --emerald: #15803d;
             --diamond: #38bdf8;
-            --blood-red: #991b1b;
         }
 
         * {
@@ -37,387 +36,477 @@
 
         body {
             font-family: 'MedievalSharp', cursive;
-            background-color: var(--obsidian);
+            background-color: var(--wood-black);
             background-image: 
-                radial-gradient(circle at 50% 20%, rgba(34, 197, 94, 0.08) 0%, transparent 60%),
-                linear-gradient(rgba(15, 18, 23, 0.92), rgba(15, 18, 23, 0.95)),
-                repeating-linear-gradient(45deg, #14181f 0, #14181f 10px, #0f1217 10px, #0f1217 20px);
+                radial-gradient(circle at 50% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+                repeating-linear-gradient(45deg, rgba(0,0,0,0.2) 0px, rgba(0,0,0,0.2) 2px, transparent 2px, transparent 8px),
+                linear-gradient(180deg, var(--wood-dark) 0%, var(--wood-black) 100%);
+            background-attachment: fixed;
             color: var(--parchment);
             line-height: 1.6;
             min-height: 100vh;
         }
 
-        h1, h2, h3, .logo, .stat-num {
+        h1, h2, h3, h4, .cinzel {
             font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
             text-transform: uppercase;
         }
 
         /* Navigation */
         nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 5%;
-            background: rgba(15, 18, 23, 0.95);
-            border-bottom: 3px solid var(--gold-dim);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(8px);
+            padding: 1rem 6%;
+            background: rgba(18, 9, 4, 0.95);
+            border-bottom: 3px solid var(--gold);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+            z-index: 1000;
         }
 
         .logo {
             font-size: 1.5rem;
-            color: var(--gold);
+            color: var(--gold-bright);
             text-decoration: none;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            font-weight: 800;
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-
-        .logo span {
-            color: var(--emerald);
+            gap: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         .nav-links {
             display: flex;
-            gap: 1rem;
+            gap: 1.2rem;
+        }
+
+        .nav-link {
+            color: var(--parchment);
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 0.4rem 0.8rem;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--gold-bright);
+            border-bottom-color: var(--gold);
         }
 
         .nav-btn {
-            background: transparent;
-            color: var(--gold);
-            border: 1px solid var(--gold-dim);
-            padding: 0.5rem 1.2rem;
-            font-family: 'Cinzel', serif;
-            font-size: 0.9rem;
+            background: var(--redstone);
+            color: var(--parchment);
+            border: 1px solid var(--gold);
+            padding: 0.4rem 1.2rem;
             text-decoration: none;
-            transition: all 0.3s;
+            font-size: 0.9rem;
+            transition: all 0.2s;
         }
 
         .nav-btn:hover {
-            background: var(--gold-dim);
-            color: var(--obsidian);
+            background: #b91c1c;
+            transform: translateY(-1px);
         }
 
         /* Hero Section */
         .hero {
-            min-height: 85vh;
+            padding: 9rem 5% 4rem;
+            text-align: center;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 8rem 5% 4rem;
             position: relative;
         }
 
         .realm-badge {
             display: inline-block;
-            background: rgba(34, 197, 94, 0.15);
-            border: 1px solid var(--emerald);
-            color: var(--emerald);
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid var(--gold);
+            color: var(--gold-bright);
             padding: 0.4rem 1.2rem;
-            border-radius: 20px;
             font-size: 0.9rem;
             margin-bottom: 1.5rem;
-            letter-spacing: 1px;
-            box-shadow: 0 0 15px var(--emerald-glow);
+            letter-spacing: 2px;
         }
 
         .hero h1 {
-            font-size: clamp(2.8rem, 6vw, 5rem);
-            color: var(--gold);
-            margin-bottom: 1rem;
-            text-shadow: 4px 4px 10px rgba(0,0,0,0.9);
+            font-size: clamp(2.8rem, 6vw, 4.8rem);
+            color: var(--gold-bright);
+            text-shadow: 3px 3px 0 #000, 0 0 20px rgba(212, 175, 55, 0.4);
+            margin-bottom: 0.8rem;
             line-height: 1.1;
         }
 
         .hero p {
             font-size: clamp(1.1rem, 2vw, 1.4rem);
-            max-width: 650px;
             color: var(--parchment-dark);
+            max-width: 680px;
             margin-bottom: 2.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
 
-        /* IP Banner / Copy Card */
-        .ip-card {
-            background: var(--stone-card);
-            border: 2px solid var(--gold);
-            border-radius: 6px;
-            padding: 1.5rem 2.5rem;
+        /* IP Action Box */
+        .server-action-box {
+            background: var(--wood-dark);
+            border: 3px solid var(--wood-border);
+            outline: 2px solid var(--gold);
+            padding: 1.5rem 2rem;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.8), 0 10px 30px rgba(0,0,0,0.6);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.8rem;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.7), inset 0 0 15px rgba(212, 175, 55, 0.15);
-            transition: transform 0.2s, border-color 0.2s;
-            max-width: 450px;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .ip-bar {
+            display: flex;
             width: 100%;
+            background: #0d0603;
+            border: 2px solid var(--wood-border);
+            border-radius: 4px;
+            overflow: hidden;
         }
 
-        .ip-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--emerald);
-        }
-
-        .ip-address {
+        .ip-text {
+            flex: 1;
+            padding: 0.9rem 1.2rem;
             font-family: 'Cinzel', serif;
-            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-size: 1.3rem;
             font-weight: 800;
-            color: var(--emerald);
+            color: var(--gold-bright);
+            background: transparent;
+            border: none;
+            text-align: center;
             letter-spacing: 1px;
+            user-select: all;
         }
 
-        .ip-subtext {
-            font-size: 0.9rem;
-            color: var(--parchment-dark);
+        .copy-btn {
+            background: var(--gold);
+            color: var(--wood-black);
+            font-family: 'Cinzel', serif;
+            font-weight: 800;
+            font-size: 1rem;
+            border: none;
+            padding: 0 1.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+        }
+
+        .copy-btn:hover {
+            background: var(--gold-bright);
+        }
+
+        .copy-btn.copied {
+            background: var(--emerald);
+            color: #fff;
+        }
+
+        /* Live Status Pill */
+        .live-status {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 0.6rem;
+            font-size: 1rem;
+            color: var(--parchment);
         }
 
         .status-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--emerald);
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
-            box-shadow: 0 0 8px var(--emerald);
-            display: inline-block;
+            background-color: #666;
+            box-shadow: 0 0 8px currentColor;
         }
 
-        /* Features / Notice Board Section */
+        .status-dot.online {
+            background-color: var(--emerald);
+            color: var(--emerald);
+        }
+
+        .status-dot.offline {
+            background-color: var(--redstone);
+            color: var(--redstone);
+        }
+
+        .compatibility-note {
+            font-size: 0.85rem;
+            color: var(--parchment-dark);
+        }
+
+        /* Realm Features (Banners / Parchment) */
         .features-section {
-            padding: 5rem 5%;
+            padding: 5rem 6%;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .section-title {
+        .section-heading {
             text-align: center;
-            font-size: 2.5rem;
-            color: var(--gold);
+            color: var(--gold-bright);
+            font-size: 2.2rem;
             margin-bottom: 3rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            position: relative;
         }
 
-        .cards-grid {
+        .section-heading::after {
+            content: "✦ ✦ ✦";
+            display: block;
+            font-size: 1rem;
+            color: var(--gold);
+            margin-top: 0.5rem;
+            letter-spacing: 4px;
+        }
+
+        .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
 
-        .feature-card {
-            background: var(--stone-card);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 2rem;
-            border-radius: 4px;
+        .scroll-card {
+            background: var(--parchment);
+            color: var(--ink);
+            padding: 2.5rem 2rem 3rem;
             position: relative;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-            transition: transform 0.3s, border-color 0.3s;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.7);
+            border: 1px solid var(--parchment-dark);
+            clip-path: polygon(0% 0%, 100% 0%, 100% 96%, 50% 100%, 0% 96%);
+            transition: transform 0.3s ease;
         }
 
-        .feature-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--gold);
+        .scroll-card:hover {
+            transform: translateY(-5px);
         }
 
-        .feature-card h3 {
-            color: var(--diamond);
+        .scroll-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: var(--wood-mid);
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .scroll-card h3 {
             font-size: 1.4rem;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            color: var(--ink);
+            margin-bottom: 0.8rem;
+            border-bottom: 2px dashed var(--parchment-dark);
             padding-bottom: 0.5rem;
         }
 
-        .feature-card p {
-            color: var(--parchment);
+        .scroll-card p {
+            color: var(--ink-muted);
             font-size: 1.05rem;
         }
 
-        /* Decrees / Rules Section (Parchment Style) */
-        .rules-section {
-            padding: 5rem 5%;
+        /* Decrees / Server Rules */
+        .decrees-section {
+            padding: 4rem 6% 6rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .decree-box {
+            background: var(--wood-dark);
+            border: 2px solid var(--gold);
+            padding: 2.5rem;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+        }
+
+        .decree-list {
+            list-style-type: none;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
         }
 
-        .parchment-scroll {
-            background-color: var(--parchment);
-            background-image: linear-gradient(rgba(193, 168, 125, 0.15) 1px, transparent 1px);
-            background-size: 100% 2em;
-            color: var(--ink);
-            padding: 3rem;
-            max-width: 700px;
-            width: 100%;
-            box-shadow: inset 0 0 30px rgba(139, 115, 85, 0.6), 0 10px 25px rgba(0,0,0,0.7);
-            border: 1px solid var(--parchment-dark);
-            border-radius: 3px;
-        }
-
-        .parchment-scroll h2 {
-            text-align: center;
-            color: var(--blood-red);
-            font-size: 2.2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .decrees-list {
-            list-style: none;
-        }
-
-        .decrees-list li {
-            margin-bottom: 1.2rem;
-            padding-left: 1.8rem;
+        .decree-list li {
+            padding-left: 2rem;
             position: relative;
             font-size: 1.1rem;
         }
 
-        .decrees-list li::before {
-            content: "✦";
-            color: var(--blood-red);
+        .decree-list li::before {
+            content: "⚔";
             position: absolute;
             left: 0;
-            font-size: 1rem;
+            top: 0;
+            color: var(--gold-bright);
         }
 
         /* Footer */
         footer {
+            background: var(--wood-black);
+            border-top: 3px solid var(--wood-border);
+            padding: 2.5rem 5%;
             text-align: center;
-            padding: 2.5rem 1rem;
-            background: #0a0c0f;
             color: var(--parchment-dark);
-            border-top: 2px solid var(--gold-dim);
             font-size: 0.95rem;
         }
 
         footer a {
-            color: var(--gold);
+            color: var(--gold-bright);
             text-decoration: none;
         }
 
         footer a:hover {
             text-decoration: underline;
         }
+
+        @media (max-width: 640px) {
+            .ip-bar {
+                flex-direction: column;
+            }
+            .copy-btn {
+                padding: 0.8rem;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
 
+    <!-- Header Navigation -->
     <nav>
-        <a href="#" class="logo">PH <span>Guilds</span> MC</a>
+        <a href="https://phguilds.org" class="logo">
+            <span>🛡️</span> PH GUILDS <span style="font-size: 0.8rem; color: var(--gold); border-left: 1px solid var(--wood-border); padding-left: 0.5rem;">REALM</span>
+        </a>
         <div class="nav-links">
-            <a href="#features" class="nav-btn">Realm Perks</a>
-            <a href="#decrees" class="nav-btn">Decrees</a>
-            <a href="https://phguilds.org" class="nav-btn" target="_blank">Main Guild Hall</a>
+            <a href="https://phguilds.org" class="nav-link">Main Guild Hall</a>
+            <a href="#features" class="nav-link">Features</a>
+            <a href="#rules" class="nav-link">Decrees</a>
         </div>
+        <a href="#join" class="nav-btn">Connect</a>
     </nav>
 
-    <section class="hero">
-        <span class="realm-badge">Medieval Survival RPG</span>
-        <h1>Enter The Blocky Realm</h1>
-        <p>Claim territory, construct grand fortresses, form alliances, and dominate the realm's economy alongside local guild members.</p>
+    <!-- Hero Section with Copyable IP & Live Status -->
+    <header class="hero" id="join">
+        <span class="realm-badge">SURVIVAL • FACTIONS • ECONOMY</span>
+        <h1>Enter the Realm</h1>
+        <p>Grab thy blade and join forces with fellow guild members across the Philippine archipelago in our dedicated SMP world.</p>
 
-        <!-- Click to copy IP widget -->
-        <div class="ip-card" id="copyWidget" onclick="copyServerIP()">
-            <span class="ip-address" id="ipDisplay">mc.phguilds.org</span>
-            <span class="ip-subtext" id="ipSubtext">
-                <span class="status-dot"></span> Click to copy server address
-            </span>
+        <!-- IP Bar -->
+        <div class="server-action-box">
+            <div class="ip-bar">
+                <input type="text" class="ip-text" id="serverIP" value="mc.phguilds.org" readonly>
+                <button class="copy-btn" id="copyBtn" onclick="copyServerIP()">Copy IP</button>
+            </div>
+
+            <!-- Dynamic Live Player Count -->
+            <div class="live-status">
+                <div class="status-dot online" id="statusDot"></div>
+                <span id="statusText">Checking server beacon...</span>
+            </div>
+
+            <span class="compatibility-note">Supports Java Edition (Default Port: 25565) & Bedrock</span>
         </div>
-    </section>
+    </header>
 
-    <section id="features" class="features-section">
-        <h2 class="section-title">Realm Features</h2>
-        <div class="cards-grid">
-            
-            <div class="feature-card">
+    <!-- Realm Pillars / Features -->
+    <section class="features-section" id="features">
+        <h2 class="section-heading">Features of the Realm</h2>
+        
+        <div class="features-grid">
+            <div class="scroll-card">
                 <h3>Guild Territories</h3>
-                <p>Establish your own faction or town. Claim lands to protect your fortresses from rival sellswords and griefers.</p>
+                <p>Stake claim to your own lands. Protect your faction's strongholds, vaults, and towns from roving bandits using intuitive territory claims.</p>
             </div>
 
-            <div class="feature-card">
-                <h3>Player-Led Economy</h3>
-                <p>Trade raw resources, enchanted weapons, and crafted gear in community auction houses or open your own merchant stall.</p>
+            <div class="scroll-card">
+                <h3>Merchant Economy</h3>
+                <p>Trade wares with local merchants in the spawn tavern, set up custom player shops, and trade rare minerals to amass your guild's treasury.</p>
             </div>
 
-            <div class="feature-card">
-                <h3>Quests & Bosses</h3>
-                <p>Take on dangerous bounties in ancient dungeons to earn gold, rare artifacts, and exclusive titles for your house.</p>
+            <div class="scroll-card">
+                <h3>Custom Bounties</h3>
+                <p>Undertake seasonal guild quests, slay mythological monstrosities, and reap diamond bounties for your faction.</p>
             </div>
-
         </div>
     </section>
 
-    <section id="decrees" class="rules-section">
-        <div class="parchment-scroll">
-            <h2>The Royal Decrees</h2>
-            <ul class="decrees-list">
-                <li><strong>Honor Thy Neighbor:</strong> Unsanctioned griefing, stolen land, or unprovoked destruction of claims is strictly forbidden.</li>
-                <li><strong>Fair Combat:</strong> Modded clients, x-ray magic, or combat scripts will result in immediate banishment to the void.</li>
-                <li><strong>Courteous Tavern Chat:</strong> Keep communications respectful across all public channels and discord taverns.</li>
-                <li><strong>Obey the Guild Masters:</strong> Admins and moderators maintain law across the realm; their word is final.</li>
+    <!-- Code of Chivalry / Decrees -->
+    <section class="decrees-section" id="rules">
+        <div class="decree-box">
+            <h2 class="cinzel" style="color: var(--gold-bright); text-align: center;">The King's Decrees</h2>
+            <ul class="decree-list">
+                <li><strong>Respect Thy Kin:</strong> Maintain honor in world chat. Harassment and toxic conduct will result in the gallows (ban).</li>
+                <li><strong>No Deceitful Sorcery:</strong> Hacked clients, xray spells, and automated cheating scripts are strictly forbidden.</li>
+                <li><strong>Honor Claimed Lands:</strong> Griefing or pillaging marked settlements outside of sanctioned faction skirmishes is forbidden.</li>
+                <li><strong>Follow the Stewards:</strong> Adhere to guidance given by guild admins and realm moderators.</li>
             </ul>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2026 PH Guilds Minecraft Realm. Part of the <a href="https://phguilds.org">PH Guilds Network</a>.</p>
+        <p>&copy; 2026 <strong>PH Guilds</strong>. Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</p>
+        <p style="margin-top: 0.5rem;"><a href="https://phguilds.org">Return to Main Guild Portal (phguilds.org)</a></p>
     </footer>
 
+    <!-- Scripts -->
     <script>
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-
-        // Copy Server IP Logic
+        // 1. One-Click Copy Server IP
         function copyServerIP() {
-            const serverIP = "mc.phguilds.org";
-            navigator.clipboard.writeText(serverIP).then(() => {
-                const ipDisplay = document.getElementById("ipDisplay");
-                const ipSubtext = document.getElementById("ipSubtext");
+            const ipInput = document.getElementById("serverIP");
+            const copyBtn = document.getElementById("copyBtn");
 
-                ipDisplay.style.color = "#ffffff";
-                ipSubtext.innerHTML = "✓ Address copied to clipboard!";
-                ipSubtext.style.color = "#22c55e";
+            navigator.clipboard.writeText(ipInput.value).then(() => {
+                copyBtn.innerText = "COPIED!";
+                copyBtn.classList.add("copied");
 
                 setTimeout(() => {
-                    ipDisplay.style.color = "var(--emerald)";
-                    ipSubtext.innerHTML = '<span class="status-dot"></span> Click to copy server address';
-                    ipSubtext.style.color = "var(--parchment-dark)";
-                }, 2500);
+                    copyBtn.innerText = "COPY IP";
+                    copyBtn.classList.remove("copied");
+                }, 2200);
             }).catch(err => {
-                console.error("Failed to copy IP: ", err);
+                console.error("Failed to copy IP", err);
             });
         }
 
-        // Optional: Fetch dynamic server status from mcsrvstat.us API
+        // 2. Fetch Live Server Status (mcstatus API)
         async function checkServerStatus() {
+            const statusDot = document.getElementById("statusDot");
+            const statusText = document.getElementById("statusText");
+            const server = "mc.phguilds.org";
+
             try {
-                const response = await fetch('https://api.mcsrvstat.us/2/mc.phguilds.org');
-                const data = await response.json();
-                const ipSubtext = document.getElementById("ipSubtext");
+                const res = await fetch(`https://api.mcstatus.io/v2/status/java/${server}`);
+                if (!res.ok) throw new Error("Status check failed");
                 
-                if (data && data.online) {
-                    ipSubtext.innerHTML = `<span class="status-dot"></span> Online — ${data.players.online}/${data.players.max} Players Active`;
+                const data = await res.json();
+
+                if (data.online) {
+                    statusDot.className = "status-dot online";
+                    statusText.innerHTML = `<strong>Online:</strong> ${data.players.online} / ${data.players.max} Adventurers Active`;
+                } else {
+                    statusDot.className = "status-dot offline";
+                    statusText.innerText = "Server is currently sleeping (Offline)";
                 }
-            } catch (e) {
-                // Keep default copy message if server offline or DNS not propagated yet
+            } catch (err) {
+                // Graceful fallback if DNS or server ping is still propagating
+                statusDot.className = "status-dot online";
+                statusText.innerText = "Realm Active • mc.phguilds.org";
             }
         }
-        
-        checkServerStatus();
+
+        // Run status check on load
+        document.addEventListener("DOMContentLoaded", checkServerStatus);
     </script>
 </body>
 </html>
