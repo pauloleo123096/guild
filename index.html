@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PH Guilds - The realm's premier network for digital artisans and service seekers.">
+    <title>PH Guilds | The Digital Guild Hall</title>
+    
+    <!-- Medieval Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=MedievalSharp&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --wood-dark: #2a1608;
+            --wood-light: #4a3018;
+            --parchment: #f1e4c3;
+            --parchment-dark: #c1a87d;
+            --ink: #2c1a0e;
+            --gold: #d4af37;
+            --gold-dim: #997a00;
+            --blood-red: #8a0303;
+            --banner-blue: #1e3a8a;
+            --banner-green: #14532d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'MedievalSharp', cursive;
+            background: linear-gradient(135deg, var(--wood-dark), var(--wood-light));
+            background-attachment: fixed;
+            color: var(--parchment);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Cinzel', serif;
+            text-transform: uppercase;
+        }
+
+        /* --- DEVELOPMENT NOTICE & WATERMARK --- */
+        .dev-notice {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background-color: var(--blood-red);
+            color: var(--parchment);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-weight: 800;
+            font-size: 0.9rem;
+            z-index: 1000;
+            border-bottom: 2px solid var(--gold-dim);
+            letter-spacing: 2px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.8);
+        }
+
+        .dev-watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-35deg);
+            font-family: 'Cinzel', serif;
+            font-size: clamp(4rem, 12vw, 12rem);
+            color: rgba(212, 175, 55, 0.05); /* Very subtle gold */
+            white-space: nowrap;
+            pointer-events: none; /* Ensures users can click through it */
+            z-index: 999;
+            font-weight: 800;
+            user-select: none;
+        }
+        /* -------------------------------------- */
+
+        /* Wood Panel Texture */
+        .wood-panel {
+            background: repeating-linear-gradient(
+                to bottom,
+                var(--wood-dark),
+                var(--wood-dark) 10px,
+                var(--wood-light) 10px,
+                var(--wood-light) 20px
+            );
+            border: 4px solid #1a0b03;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        /* Parchment Texture */
+        .parchment {
+            background-color: var(--parchment);
+            background-image: linear-gradient(rgba(193, 168, 125, 0.1) 1px, transparent 1px);
+            background-size: 100% 2em;
+            color: var(--ink);
+            box-shadow: inset 0 0 30px rgba(139, 115, 85, 0.5), 0 5px 15px rgba(0,0,0,0.5);
+            border: 1px solid var(--parchment-dark);
+            border-radius: 3px;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: rgba(26, 11, 3, 0.95);
+            border-bottom: 3px solid var(--gold-dim);
+            position: fixed;
+            width: 100%;
+            top: 40px; /* Shifted down by 40px to accommodate dev notice */
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold-dim);
+            padding: 0.5rem 1.5rem;
+            font-family: 'Cinzel', serif;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            background: var(--gold-dim);
+            color: var(--wood-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 5% 4rem;
+            background: radial-gradient(circle at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            color: var(--gold);
+            margin-bottom: 1rem;
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.9);
+        }
+
+        .hero p {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            max-width: 700px;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .btn-primary {
+            background: var(--blood-red);
+            color: var(--parchment);
+            padding: 1rem 2.5rem;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border: 2px solid #5a0202;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 0 5px 15px rgba(0,0,0,0.5);
+            transition: transform 0.2s, background 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: #a30404;
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        /* Guilds Roster Section */
+        .guilds-section {
+            padding: 5rem 5%;
+            background: rgba(0,0,0,0.3);
+            border-top: 2px solid #1a0b03;
+            border-bottom: 2px solid #1a0b03;
+        }
+
+        .guild-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+        }
+
+        /* Banner Design */
+        .guild-banner {
+            position: relative;
+            background: var(--parchment);
+            padding: 3rem 2rem 4rem;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+            /* Creating the pointed banner bottom */
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 90%, 0% 100%);
+        }
+
+        .guild-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: var(--wood-dark);
+            border-bottom: 2px solid var(--gold-dim);
+        }
+
+        .guild-banner h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--ink);
+            border-bottom: 1px solid var(--parchment-dark);
+            padding-bottom: 0.5rem;
+        }
+
+        .guild-location {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .banner-red { border-top: 15px solid var(--blood-red); }
+        .banner-blue { border-top: 15px solid var(--banner-blue); }
+        .banner-green { border-top: 15px solid var(--banner-green); }
+
+        /* Job Board (Bounties) */
+        .bounties {
+            padding: 5rem 5%;
+        }
+
+        .notice-board {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .bounty-scroll {
+            padding: 2rem;
+            position: relative;
+            transform: rotate(-1deg);
+            transition: transform 0.3s;
+        }
+
+        .bounty-scroll:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .bounty-scroll:hover {
+            transform: scale(1.05) rotate(0);
+            z-index: 10;
+        }
+
+        .wax-seal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            background: var(--blood-red);
+            border-radius: 50%;
+            box-shadow: inset 0 0 10px #4a0101, 1px 2px 3px rgba(0,0,0,0.3);
+        }
+
+        .bounty-scroll h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--blood-red);
+            border-bottom: 2px dashed var(--parchment-dark);
+            padding-bottom: 0.5rem;
+        }
+
+        .reward {
+            font-weight: bold;
+            color: var(--wood-dark);
+            margin-top: 1.5rem;
+            display: block;
+            font-size: 1.1rem;
+        }
+
+        /* Sign the Ledger (Form) */
+        .ledger-section {
+            padding: 5rem 5%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .ledger-book {
+            max-width: 600px;
+            width: 100%;
+            padding: 3rem;
+        }
+
+        .ledger-book h2 {
+            text-align: center;
+            color: var(--ink);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--ink);
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid var(--parchment-dark);
+            color: var(--ink);
+            font-family: 'MedievalSharp', cursive;
+            font-size: 1.1rem;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-bottom-color: var(--blood-red);
+        }
+
+        .submit-seal {
+            width: 100%;
+            margin-top: 2rem;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #1a0b03;
+            color: var(--parchment-dark);
+            border-top: 2px solid var(--gold-dim);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ADDED DEV NOTICE AND WATERMARK -->
+    <div class="dev-notice">
+        ⚔️ Hark! This realm is under active development. ⚔️
+    </div>
+    
+    <div class="dev-watermark">
+        Under Development
+    </div>
+    <!-- ----------------------------- -->
+
+    <nav>
+        <a href="#" class="logo">PH Guilds</a>
+        <div class="nav-links">
+            <a href="#guilds" class="nav-btn">View Guilds</a>
+            <a href="#pledge" class="nav-btn">Join the Ranks</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Connect. Forge. Conquer.</h1>
+        <p>The realm's premier tavern for digital artisans, sellswords of code, and visual alchemists. Seek quests or pledge your blade.</p>
+        <a href="#bounties" class="btn-primary">View the Notice Board</a>
+    </section>
+
+    <section id="guilds" class="guilds-section">
+        <h2 class="section-title">Established Factions</h2>
+        <div class="guild-grid">
+            
+            <div class="guild-banner parchment banner-blue">
+                <h3>Code Weavers of Cebu</h3>
+                <span class="guild-location">Central Visayas Region</span>
+                <p>A disciplined order of web architects and progressive web app enchanters. Known for rapid deployment and unyielding code structures.</p>
+            </div>
+
+            <div class="guild-banner parchment banner-red">
+                <h3>Digital Marketing Service Seekers Guild</h3>
+                <span class="guild-location">San Roque, Tolosa</span>
+                <p>A formidable alliance of growth alchemists and strategists. Masters of capturing attention and steering the digital winds to their favor.</p>
+            </div>
+
+            <div class="guild-banner parchment banner-green">
+                <h3>The Visu-Alchemists Conclave</h3>
+                <span class="guild-location">Wandering / Remote</span>
+                <p>An esoteric gathering of vector mages and canvas manipulators, transforming mere thoughts into breathtaking heraldry and visual artifacts.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="bounties" class="bounties">
+        <h2 class="section-title">Active Bounties</h2>
+        <div class="notice-board wood-panel">
+            
+            <!-- Bounty 1 -->
+            <div class="bounty-scroll parchment">
+                <div class="wax-seal"></div>
+                <h3>Scribe of the Web</h3>
+                <p><strong>Guild seeking:</strong> Code Weaver (Web Developer)</p>
+                <p>Required to forge a responsive digital grimoire (landing page) for a merchant in Cebu. Must possess knowledge of HTML, JS, and responsive wards.</p>
+                <span class="reward">Reward: 15,000 PHP</span>
+            </div>
+
+            <!-- Bounty 2 -->
+            <div class="bounty-scroll parchment">
+                <div class="wax-seal"></div>
+                <h3>Visu-Alchemist</h3>
+                <p><strong>Guild seeking:</strong> Illustrator / Designer</p>
+                <p>A noble house requires a new heraldic crest (logo) and banners for their upcoming tournament. Mastery of vector magic required.</p>
+                <span class="reward">Reward: 8,000 PHP</span>
+            </div>
+
+            <!-- Bounty 3 -->
+            <div class="bounty-scroll parchment">
+                <div class="wax-seal"></div>
+                <h3>Master of Ravens</h3>
+                <p><strong>Guild seeking:</strong> Social Media Manager</p>
+                <p>Need a silver-tongued bard to manage communications across the realm. 3 moons (months) contract, weekly town crier updates.</p>
+                <span class="reward">Reward: 20,000 PHP / moon</span>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="pledge" class="ledger-section">
+        <div class="ledger-book parchment">
+            <h2>Pledge Your Fealty</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">Sign the ledger to join the guild waitlist and be summoned when new bounties arise.</p>
+            
+            <form id="pledgeForm">
+                <!-- Ready for Web3Forms -->
+                <!-- <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE"> -->
+                
+                <div class="form-group">
+                    <label for="name">Thy Given Name (Full Name)</label>
+                    <input type="text" id="name" name="name" required placeholder="Juan of House Dela Cruz">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Raven Destination (Email Address)</label>
+                    <input type="email" id="email" name="email" required placeholder="juan@domain.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="class">Thy Chosen Class</label>
+                    <select id="class" name="class" required>
+                        <option value="" disabled selected>Select thy mastery...</option>
+                        <option value="code">Code Weaver (Developer)</option>
+                        <option value="design">Visu-Alchemist (Designer)</option>
+                        <option value="market">Master of Coin (Marketer)</option>
+                        <option value="other">Sellsword (Other/Freelance)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-primary submit-seal">Sign the Ledger</button>
+            </form>
+            <p id="formStatus" style="text-align: center; margin-top: 1rem; color: #155724; font-weight: bold; display: none;">Thy name has been recorded in the archives!</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 PH Guilds. Forged in the fires of the web.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                // Subtracted 80 to account for the new dev banner + nav offset
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                const offset = 80;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+  
+                window.scrollTo({
+                     top: offsetPosition,
+                     behavior: "smooth"
+                });
+            });
+        });
+
+        // Form handling mock
+        document.getElementById('pledgeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            this.style.display = 'none';
+            document.getElementById('formStatus').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
