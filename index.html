@@ -18,9 +18,9 @@
             --parchment: #f8f9fa;
             --parchment-dark: #e9ecef;
             --ink: #212529;
-            --gold: #3b82f6; /* Modern Blue */
+            --gold: #3b82f6;
             --gold-dim: #2563eb;
-            --blood-red: #dc2626; /* Alert Red */
+            --blood-red: #dc2626;
             --banner-blue: #1e3a8a;
             --banner-green: #14532d;
         }
@@ -80,7 +80,7 @@
             user-select: none;
         }
 
-        /* Modern Card Texture (Replaced Wood/Parchment) */
+        /* Modern Card Texture */
         .wood-panel {
             background: #242424;
             border: 1px solid #333;
@@ -419,7 +419,14 @@
             <h2>Join the Talent Pool</h2>
             <p style="text-align: center; margin-bottom: 2rem;">Register below to join our network and get notified when new projects match your skills.</p>
             
-            <form id="pledgeForm">
+            <form id="pledgeForm" action="https://api.web3forms.com/submit" method="POST">
+                
+                <!-- PASTE YOUR ACCESS KEY ON THE LINE BELOW -->
+                <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                
+                <input type="hidden" name="subject" value="New Guild Application - phguilds.org">
+                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
                 <div class="form-group">
                     <label for="name">Full Name</label>
                     <input type="text" id="name" name="name" required placeholder="Juan Dela Cruz">
@@ -443,7 +450,7 @@
 
                 <button type="submit" class="btn-primary submit-seal">Submit Application</button>
             </form>
-            <p id="formStatus" style="text-align: center; margin-top: 1rem; color: #155724; font-weight: bold; display: none;">Your application has been received!</p>
+            <p id="formStatus" style="text-align: center; margin-top: 1rem; font-weight: bold; display: none;"></p>
         </div>
     </section>
 
@@ -469,15 +476,48 @@
             });
         });
 
-        // Form handling mock
+        // Web3Forms AJAX Form Submission
         document.getElementById('pledgeForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            this.style.display = 'none';
-            document.getElementById('formStatus').style.display = 'block';
+            
+            const form = e.target;
+            const formData = new FormData(form);
+            const statusText = document.getElementById('formStatus');
+            const submitBtn = form.querySelector('button[type="submit"]');
+
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(async (response) => {
+                let json = await response.json();
+                if (response.status == 200) {
+                    form.style.display = 'none';
+                    statusText.style.display = 'block';
+                    statusText.style.color = '#155724'; 
+                    statusText.textContent = 'Your application has been received!';
+                } else {
+                    statusText.style.display = 'block';
+                    statusText.style.color = '#dc2626'; 
+                    statusText.textContent = json.message || 'Something went wrong. Please try again.';
+                    submitBtn.textContent = 'Submit Application';
+                    submitBtn.disabled = false;
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                statusText.style.display = 'block';
+                statusText.style.color = '#dc2626';
+                statusText.textContent = 'Network error. Please try again.';
+                submitBtn.textContent = 'Submit Application';
+                submitBtn.disabled = false;
+            });
         });
 
-        // --- CONTENT MANAGEMENT SYSTEM (LOCAL STORAGE) ---
-        // This script checks for edits made in the Admin panel and updates the site live.
+        // CMS / local storage text population via cube.html
         window.addEventListener('DOMContentLoaded', () => {
             const savedContent = JSON.parse(localStorage.getItem('phguilds_content'));
             if (savedContent) {
