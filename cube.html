@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PH Guilds | Admin Dashboard</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f4f4f5;
+            padding: 2rem;
+            color: #333;
+        }
+        .admin-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 {
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+            background: #f9fafb;
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #4b5563;
+        }
+        textarea, input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .save-btn {
+            background: #2563eb;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+        .save-btn:hover { background: #1d4ed8; }
+        .success-msg {
+            display: none;
+            background: #dcfce7;
+            color: #166534;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="admin-container">
+        <h1>Admin Content Editor</h1>
+        <div class="success-msg" id="successMsg">Changes Saved Successfully! Refresh the main site to see them.</div>
+        
+        <form id="adminForm">
+            <!-- Hero Section -->
+            <h2>Hero Section</h2>
+            <div class="form-group">
+                <label>Main Headline (hero-title)</label>
+                <input type="text" id="hero-title" value="Connect. Build. Scale.">
+            </div>
+            <div class="form-group">
+                <label>Subheadline (hero-subtitle)</label>
+                <textarea id="hero-subtitle">The premier network for digital professionals, software engineers, and creative strategists. Find specialized projects or join our talent pool.</textarea>
+            </div>
+
+            <!-- Job 1 -->
+            <h2>Job Posting 1</h2>
+            <div class="form-group">
+                <label>Job Title (job1-title)</label>
+                <input type="text" id="job1-title" value="Frontend Web Developer">
+            </div>
+            <div class="form-group">
+                <label>Job Description (job1-desc)</label>
+                <textarea id="job1-desc">Required to build a responsive landing page and product showcase for an e-commerce client in Cebu. Must be proficient in HTML, JS, and Tailwind CSS.</textarea>
+            </div>
+            <div class="form-group">
+                <label>Budget/Reward (job1-reward)</label>
+                <input type="text" id="job1-reward" value="Budget: 15,000 PHP">
+            </div>
+
+            <!-- Job 2 -->
+            <h2>Job Posting 2</h2>
+            <div class="form-group">
+                <label>Job Title (job2-title)</label>
+                <input type="text" id="job2-title" value="Graphic Illustrator">
+            </div>
+            <div class="form-group">
+                <label>Job Description (job2-desc)</label>
+                <textarea id="job2-desc">A corporate client requires a modern brand identity refresh, including vector logos and social media marketing assets.</textarea>
+            </div>
+            <div class="form-group">
+                <label>Budget/Reward (job2-reward)</label>
+                <input type="text" id="job2-reward" value="Budget: 8,000 PHP">
+            </div>
+
+            <button type="submit" class="save-btn">Save All Changes</button>
+        </form>
+    </div>
+
+    <script>
+        // Load existing content on startup
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedContent = JSON.parse(localStorage.getItem('phguilds_content'));
+            if (savedContent) {
+                Object.keys(savedContent).forEach(key => {
+                    const inputField = document.getElementById(key);
+                    if (inputField) {
+                        inputField.value = savedContent[key];
+                    }
+                });
+            }
+        });
+
+        // Save content on submit
+        document.getElementById('adminForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const newContent = {
+                'hero-title': document.getElementById('hero-title').value,
+                'hero-subtitle': document.getElementById('hero-subtitle').value,
+                'job1-title': document.getElementById('job1-title').value,
+                'job1-desc': document.getElementById('job1-desc').value,
+                'job1-reward': document.getElementById('job1-reward').value,
+                'job2-title': document.getElementById('job2-title').value,
+                'job2-desc': document.getElementById('job2-desc').value,
+                'job2-reward': document.getElementById('job2-reward').value
+            };
+
+            localStorage.setItem('phguilds_content', JSON.stringify(newContent));
+            
+            const msg = document.getElementById('successMsg');
+            msg.style.display = 'block';
+            setTimeout(() => msg.style.display = 'none', 3000);
+        });
+    </script>
+</body>
+</html>
