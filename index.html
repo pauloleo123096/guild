@@ -3,58 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHGuilds</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-slate-900 text-white font-sans antialiased">
-    <!-- Header -->
-    <header class="p-6 flex justify-between items-center border-b border-slate-800">
-        <h1 class="text-2xl font-bold tracking-tight text-blue-400">PHGuilds</h1>
-        <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-medium transition">Get in Touch</a>
-    </header>
+    <title>Digital Talent Hub - Philippine Guilds</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --wood-dark: #2c1e16;
+            --wood-light: #4a3320;
+            --parchment: #fdf5e6;
+            --gold: #d4af37;
+            --gold-dim: #aa8c2c;
+            --text-dark: #332211;
+        }
 
-    <!-- Hero -->
-    <main class="max-w-4xl mx-auto py-20 px-6 text-center">
-        <h2 class="text-5xl font-extrabold mb-6" data-content-id="hero-title">Welcome to PHGuilds</h2>
-        <p class="text-xl text-slate-400 mb-10" data-content-id="hero-subtitle">A premier gaming and development community.</p>
-        
-        <div class="bg-slate-800 p-8 rounded-xl text-left border border-slate-700 mb-16 shadow-lg">
-            <h3 class="text-2xl font-semibold mb-4 text-blue-400">About Us</h3>
-            <p class="text-slate-300 leading-relaxed" data-content-id="about-text">We are a collective of developers and gamers building next-level experiences.</p>
+        body {
+            margin: 0;
+            font-family: 'Lora', serif;
+            background-color: var(--wood-dark);
+            color: var(--parchment);
+            background-image: repeating-linear-gradient(
+                45deg,
+                var(--wood-dark) 0px,
+                var(--wood-dark) 10px,
+                var(--wood-light) 10px,
+                var(--wood-light) 20px
+            );
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Nav Bar */
+        nav {
+            background-color: rgba(44, 30, 22, 0.95);
+            border-bottom: 2px solid var(--gold);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 0;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+        nav a {
+            color: var(--parchment);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: rgba(0,0,0,0.6);
+            border: 2px solid var(--gold-dim);
+            border-radius: 8px;
+            margin-bottom: 3rem;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+        }
+
+        /* Parchment Cards */
+        .card {
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            padding: 2rem;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            box-shadow: 3px 3px 15px rgba(0,0,0,0.5);
+            position: relative;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 1px solid rgba(139, 69, 19, 0.2);
+            pointer-events: none;
+        }
+        .card h2 {
+            color: #8b4513; /* Dark saddle brown for parchment text */
+            text-shadow: none;
+            border-bottom: 2px solid #8b4513;
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        /* Forms */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        label {
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            color: #8b4513;
+        }
+        input, select, textarea {
+            padding: 0.8rem;
+            background-color: rgba(255,255,255,0.7);
+            border: 1px solid #8b4513;
+            font-family: 'Lora', serif;
+            font-size: 1rem;
+            border-radius: 2px;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--gold-dim);
+            background-color: #fff;
+        }
+        button {
+            background-color: var(--wood-dark);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            padding: 1rem;
+            border: 2px solid var(--gold);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background-color: var(--gold);
+            color: var(--wood-dark);
+            border-color: var(--wood-dark);
+        }
+
+        /* Hidden Bot Check */
+        .hidden-bot {
+            display: none;
+        }
+
+        /* Grid for Guild Teams */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        #result-message {
+            margin-top: 1rem;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="#teams">Guild Teams</a></li>
+            <li><a href="#jobs">Quest Board</a></li>
+            <li><a href="#pledge">Join the Ranks</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1 data-content-id="hero-title">Philippine Guilds: Digital Talent Hub</h1>
+            <p data-content-id="hero-desc">Forging pathways for Web Developers, Designers, and Digital Marketers across the realm.</p>
         </div>
 
-        <!-- Contact Form (Web3Forms) -->
-        <section id="contact" class="bg-slate-800 p-8 rounded-xl text-left border border-slate-700 shadow-lg">
-            <h3 class="text-2xl font-semibold mb-2 text-blue-400">Contact Us</h3>
-            <p class="text-slate-400 mb-6">Reach out to us at <span data-content-id="contact-email" class="font-medium text-white">hello@phguilds.org</span> or use the form below.</p>
+        <!-- Guild Teams Section -->
+        <h2 id="teams">Our Guild Specialties</h2>
+        <div class="team-grid">
+            <div class="card">
+                <h2 data-content-id="team1-title">Web Development</h2>
+                <p><strong>HQ:</strong> <span data-content-id="team1-loc">Cebu City</span></p>
+                <p data-content-id="team1-desc">Masters of code, architecture, and real-time backend systems.</p>
+            </div>
             
-            <form action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
-                <!-- Replace with your actual Web3Forms Key -->
-                <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
-                
-                <div>
-                    <label class="block text-sm font-medium text-slate-300 mb-1">Name</label>
-                    <input type="text" name="name" required class="w-full bg-slate-900 border border-slate-700 rounded px-4 py-2 focus:outline-none focus:border-blue-500 text-white">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-slate-300 mb-1">Email</label>
-                    <input type="email" name="email" required class="w-full bg-slate-900 border border-slate-700 rounded px-4 py-2 focus:outline-none focus:border-blue-500 text-white">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-slate-300 mb-1">Message</label>
-                    <textarea name="message" required rows="4" class="w-full bg-slate-900 border border-slate-700 rounded px-4 py-2 focus:outline-none focus:border-blue-500 text-white"></textarea>
-                </div>
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded transition">Send Message</button>
-            </form>
-        </section>
-    </main>
+            <div class="card">
+                <h2 data-content-id="team2-title">UI / UX Design</h2>
+                <p><strong>HQ:</strong> <span data-content-id="team2-loc">Makati City</span></p>
+                <p data-content-id="team2-desc">Crafters of beautiful, intuitive interfaces for games and apps.</p>
+            </div>
 
-    <footer class="text-center p-6 text-slate-500 text-sm">
-        &copy; 2026 PHGuilds. All rights reserved.
-    </footer>
+            <div class="card">
+                <h2 data-content-id="team3-title">Digital Marketing</h2>
+                <p><strong>HQ:</strong> <span data-content-id="team3-loc">Tacloban City</span></p>
+                <p data-content-id="team3-desc">Strategists who amplify voices and build lasting digital presence.</p>
+            </div>
+        </div>
+
+        <!-- Quest Board -->
+        <div id="jobs" class="card">
+            <h2 data-content-id="jobs-title">Open Quests (Job Board)</h2>
+            <div data-content-id="jobs-list">
+                <ul>
+                    <li><em>No active quests posted yet. Check back soon.</em></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Web3Forms Integration -->
+        <div id="pledge" class="card">
+            <h2>Pledge Your Skills</h2>
+            <p>Ready to join a team? Submit your details to the guildmasters.</p>
+            
+            <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                <!-- Replace with your actual Web3Forms Access Key -->
+                <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY_HERE">
+                
+                <!-- Anti-Spam Honeypot -->
+                <input type="checkbox" name="botcheck" class="hidden-bot" style="display: none;">
+
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required placeholder="Leo Paulo">
+
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required placeholder="name@example.com">
+
+                <label for="specialty">Your Specialty</label>
+                <select id="specialty" name="specialty" required>
+                    <option value="" disabled selected>Select a class...</option>
+                    <option value="Web Developer">Web Developer (FastAPI, Next.js, etc.)</option>
+                    <option value="Game Developer">Game Developer (Godot)</option>
+                    <option value="UI/UX Designer">UI/UX Designer</option>
+                    <option value="Digital Marketer">Digital Marketer</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="message">Message / Links to Portfolio</label>
+                <textarea id="message" name="message" rows="4" required placeholder="Tell us about your recent projects or paste your GitHub/Portfolio link."></textarea>
+
+                <button type="submit">Submit Pledge</button>
+                <p id="result-message"></p>
+            </form>
+        </div>
+    </div>
 
     <script>
-        // Fetch content.json dynamically to populate the site
+        // Smooth Scrolling for Nav Links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Web3Forms AJAX Submission (Prevents redirecting away from the page)
+        const form = document.getElementById('contactForm');
+        const result = document.getElementById('result-message');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+            
+            result.innerHTML = "Sending raven...";
+            result.style.color = "var(--text-dark)";
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let jsonResponse = await response.json();
+                if (response.status == 200) {
+                    result.innerHTML = "Pledge successfully received by the guild!";
+                    result.style.color = "green";
+                    form.reset();
+                } else {
+                    console.log(response);
+                    result.innerHTML = jsonResponse.message;
+                    result.style.color = "red";
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                result.innerHTML = "Something went wrong! Please try again.";
+                result.style.color = "red";
+            });
+        });
+
+        // Fetch content.json dynamically to populate the site via GitHub REST API updates
         document.addEventListener('DOMContentLoaded', async () => {
             try {
                 // The ?v= timestamp prevents the browser from loading an outdated cached version
@@ -62,9 +312,9 @@
                 if (res.ok) {
                     const content = await res.json();
                     document.querySelectorAll('[data-content-id]').forEach(el => {
-                        const key = el.getAttribute('data-content-id');
-                        if (content[key]) {
-                            el.innerHTML = content[key];
+                        const id = el.getAttribute('data-content-id');
+                        if (content[id]) {
+                            el.innerHTML = content[id];
                         }
                     });
                 }
