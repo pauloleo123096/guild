@@ -3,162 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PH Guilds | Admin Dashboard</title>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #f4f4f5;
-            padding: 2rem;
-            color: #333;
-        }
-        .admin-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        h1 {
-            border-bottom: 2px solid #e5e7eb;
-            padding-bottom: 1rem;
-            margin-bottom: 2rem;
-        }
-        .form-group {
-            margin-bottom: 1.5rem;
-            background: #f9fafb;
-            padding: 1rem;
-            border-radius: 6px;
-            border: 1px solid #e5e7eb;
-        }
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #4b5563;
-        }
-        textarea, input {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #d1d5db;
-            border-radius: 4px;
-            font-family: inherit;
-        }
-        textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-        .save-btn {
-            background: #2563eb;
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 4px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-        }
-        .save-btn:hover { background: #1d4ed8; }
-        .success-msg {
-            display: none;
-            background: #dcfce7;
-            color: #166534;
-            padding: 1rem;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-            text-align: center;
-            font-weight: bold;
-        }
-    </style>
+    <title>Cube Admin - Content Editor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-slate-100 text-slate-900 font-sans p-6">
+    <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-md border border-slate-200">
+        <h1 class="text-3xl font-bold mb-2">Cube Dashboard</h1>
+        <p class="text-slate-500 mb-8">Update the content on your live site via the GitHub REST API.</p>
 
-    <div class="admin-container">
-        <h1>Admin Content Editor</h1>
-        <div class="success-msg" id="successMsg">Changes Saved Successfully! Refresh the main site to see them.</div>
-        
-        <form id="adminForm">
-            <!-- Hero Section -->
-            <h2>Hero Section</h2>
-            <div class="form-group">
-                <label>Main Headline (hero-title)</label>
-                <input type="text" id="hero-title" value="Connect. Build. Scale.">
+        <!-- GitHub Config -->
+        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 mb-8">
+            <h2 class="text-lg font-semibold mb-4 text-slate-700">GitHub Credentials</h2>
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">GitHub Username</label>
+                    <input type="text" id="gh-owner" value="YOUR_GITHUB_USERNAME" class="w-full border rounded px-3 py-2 bg-white">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Repository Name</label>
+                    <input type="text" id="gh-repo" value="phguilds.org" class="w-full border rounded px-3 py-2 bg-white">
+                </div>
             </div>
-            <div class="form-group">
-                <label>Subheadline (hero-subtitle)</label>
-                <textarea id="hero-subtitle">The premier network for digital professionals, software engineers, and creative strategists. Find specialized projects or join our talent pool.</textarea>
+            <div>
+                <label class="block text-sm font-medium mb-1">Personal Access Token (PAT)</label>
+                <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxx" class="w-full border rounded px-3 py-2 bg-white mb-2">
+                <p class="text-xs text-slate-500">Your token is never stored on a server. It remains locally in your browser session.</p>
             </div>
+        </div>
 
-            <!-- Job 1 -->
-            <h2>Job Posting 1</h2>
-            <div class="form-group">
-                <label>Job Title (job1-title)</label>
-                <input type="text" id="job1-title" value="Frontend Web Developer">
+        <!-- Content Editor -->
+        <div class="mb-8">
+            <h2 class="text-lg font-semibold mb-4 text-slate-700">Site Content</h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Hero Title</label>
+                    <input type="text" id="hero-title" class="w-full border rounded px-3 py-2 bg-white content-field" data-key="hero-title">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Hero Subtitle</label>
+                    <input type="text" id="hero-subtitle" class="w-full border rounded px-3 py-2 bg-white content-field" data-key="hero-subtitle">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">About Text</label>
+                    <textarea id="about-text" rows="4" class="w-full border rounded px-3 py-2 bg-white content-field" data-key="about-text"></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Contact Email</label>
+                    <input type="email" id="contact-email" class="w-full border rounded px-3 py-2 bg-white content-field" data-key="contact-email">
+                </div>
             </div>
-            <div class="form-group">
-                <label>Job Description (job1-desc)</label>
-                <textarea id="job1-desc">Required to build a responsive landing page and product showcase for an e-commerce client in Cebu. Must be proficient in HTML, JS, and Tailwind CSS.</textarea>
-            </div>
-            <div class="form-group">
-                <label>Budget/Reward (job1-reward)</label>
-                <input type="text" id="job1-reward" value="Budget: 15,000 PHP">
-            </div>
+        </div>
 
-            <!-- Job 2 -->
-            <h2>Job Posting 2</h2>
-            <div class="form-group">
-                <label>Job Title (job2-title)</label>
-                <input type="text" id="job2-title" value="Graphic Illustrator">
-            </div>
-            <div class="form-group">
-                <label>Job Description (job2-desc)</label>
-                <textarea id="job2-desc">A corporate client requires a modern brand identity refresh, including vector logos and social media marketing assets.</textarea>
-            </div>
-            <div class="form-group">
-                <label>Budget/Reward (job2-reward)</label>
-                <input type="text" id="job2-reward" value="Budget: 8,000 PHP">
-            </div>
-
-            <button type="submit" class="save-btn">Save All Changes</button>
-        </form>
+        <!-- Actions -->
+        <div class="flex gap-4">
+            <button id="load-btn" class="bg-slate-200 hover:bg-slate-300 text-slate-800 px-6 py-2 rounded font-medium transition">Load Current Content</button>
+            <button id="publish-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded font-medium transition">Publish Changes to Live Site</button>
+        </div>
+        <div id="status-message" class="mt-4 text-sm font-medium hidden"></div>
     </div>
 
     <script>
-        // Load existing content on startup
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedContent = JSON.parse(localStorage.getItem('phguilds_content'));
-            if (savedContent) {
-                Object.keys(savedContent).forEach(key => {
-                    const inputField = document.getElementById(key);
-                    if (inputField) {
-                        inputField.value = savedContent[key];
+        // UTF-8 safe base64 encoding prevents API errors when pushing emojis or special characters
+        function utf8_to_b64(str) {
+            return window.btoa(unescape(encodeURIComponent(str)));
+        }
+        function b64_to_utf8(str) {
+            return decodeURIComponent(escape(window.atob(str)));
+        }
+
+        let currentFileSha = null;
+        const filePath = 'content.json';
+
+        function showStatus(msg, isError = false) {
+            const el = document.getElementById('status-message');
+            el.textContent = msg;
+            el.className = `mt-4 text-sm font-medium p-3 rounded ${isError ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`;
+            el.classList.remove('hidden');
+        }
+
+        async function fetchContent() {
+            const owner = document.getElementById('gh-owner').value.trim();
+            const repo = document.getElementById('gh-repo').value.trim();
+            const token = document.getElementById('gh-token').value.trim();
+
+            if (!owner || !repo || !token) {
+                showStatus("Please enter your GitHub Username, Repo, and Token.", true);
+                return;
+            }
+
+            try {
+                const url = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
+                const res = await fetch(url, {
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Accept': 'application/vnd.github+json'
                     }
                 });
+
+                if (res.status === 404) {
+                    showStatus("content.json not found in repo. Hitting publish will create it.");
+                    return;
+                }
+                if (!res.ok) throw new Error(await res.text());
+
+                const data = await res.json();
+                currentFileSha = data.sha; // Save SHA to allow API overwriting
+                
+                const jsonContent = b64_to_utf8(data.content);
+                const parsedContent = JSON.parse(jsonContent);
+
+                document.querySelectorAll('.content-field').forEach(el => {
+                    const key = el.getAttribute('data-key');
+                    if (parsedContent[key] !== undefined) {
+                        el.value = parsedContent[key];
+                    }
+                });
+
+                showStatus("Content loaded successfully from GitHub!");
+            } catch (err) {
+                console.error(err);
+                showStatus("Failed to load content: " + err.message, true);
             }
-        });
+        }
 
-        // Save content on submit
-        document.getElementById('adminForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const newContent = {
-                'hero-title': document.getElementById('hero-title').value,
-                'hero-subtitle': document.getElementById('hero-subtitle').value,
-                'job1-title': document.getElementById('job1-title').value,
-                'job1-desc': document.getElementById('job1-desc').value,
-                'job1-reward': document.getElementById('job1-reward').value,
-                'job2-title': document.getElementById('job2-title').value,
-                'job2-desc': document.getElementById('job2-desc').value,
-                'job2-reward': document.getElementById('job2-reward').value
-            };
+        async function publishContent() {
+            const owner = document.getElementById('gh-owner').value.trim();
+            const repo = document.getElementById('gh-repo').value.trim();
+            const token = document.getElementById('gh-token').value.trim();
 
-            localStorage.setItem('phguilds_content', JSON.stringify(newContent));
-            
-            const msg = document.getElementById('successMsg');
-            msg.style.display = 'block';
-            setTimeout(() => msg.style.display = 'none', 3000);
-        });
+            if (!owner || !repo || !token) {
+                showStatus("Please enter your GitHub Username, Repo, and Token.", true);
+                return;
+            }
+
+            const newContent = {};
+            document.querySelectorAll('.content-field').forEach(el => {
+                newContent[el.getAttribute('data-key')] = el.value;
+            });
+
+            const jsonString = JSON.stringify(newContent, null, 2);
+            const base64Content = utf8_to_b64(jsonString);
+
+            try {
+                const url = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
+                
+                const body = {
+                    message: "Update site content via Cube Dashboard",
+                    content: base64Content
+                };
+
+                // The GitHub API requires the exact SHA to overwrite an existing file
+                if (currentFileSha) {
+                    body.sha = currentFileSha;
+                }
+
+                const res = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Accept': 'application/vnd.github+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(body)
+                });
+
+                if (!res.ok) throw new Error(await res.text());
+
+                const data = await res.json();
+                currentFileSha = data.content.sha; // Update SHA after a successful push
+
+                showStatus("Changes published! Give it 1-2 minutes for GitHub Pages to deploy the update.");
+            } catch (err) {
+                console.error(err);
+                showStatus("Failed to publish: " + err.message, true);
+            }
+        }
+
+        document.getElementById('load-btn').addEventListener('click', fetchContent);
+        document.getElementById('publish-btn').addEventListener('click', publishContent);
     </script>
 </body>
 </html>
