@@ -3,530 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PH Guilds - The premier network for digital professionals and service seekers.">
-    <title>PH Guilds | The Digital Talent Hub</title>
-    
-    <!-- Modern Professional Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --wood-dark: #1a1a1a;
-            --wood-light: #2d2d2d;
-            --parchment: #f8f9fa;
-            --parchment-dark: #e9ecef;
-            --ink: #212529;
-            --gold: #3b82f6;
-            --gold-dim: #2563eb;
-            --blood-red: #dc2626;
-            --banner-blue: #1e3a8a;
-            --banner-green: #14532d;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--wood-dark), var(--wood-light));
-            background-attachment: fixed;
-            color: var(--parchment);
-            line-height: 1.6;
-        }
-
-        h1, h2, h3, .logo {
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-        }
-
-        /* --- DEVELOPMENT NOTICE & WATERMARK --- */
-        .dev-notice {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 40px;
-            background-color: var(--blood-red);
-            color: var(--parchment);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
-            font-size: 0.9rem;
-            z-index: 1000;
-            border-bottom: 2px solid #991b1b;
-            letter-spacing: 2px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.8);
-        }
-
-        .dev-watermark {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-35deg);
-            font-family: 'Montserrat', sans-serif;
-            font-size: clamp(4rem, 12vw, 12rem);
-            color: rgba(255, 255, 255, 0.03);
-            white-space: nowrap;
-            pointer-events: none;
-            z-index: 999;
-            font-weight: 800;
-            user-select: none;
-        }
-
-        /* Modern Card Texture */
-        .wood-panel {
-            background: #242424;
-            border: 1px solid #333;
-            border-radius: 8px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-        }
-
-        .parchment {
-            background-color: var(--parchment);
-            color: var(--ink);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border: 1px solid var(--parchment-dark);
-            border-radius: 8px;
-        }
-
-        /* Navigation */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 5%;
-            background: rgba(26, 26, 26, 0.95);
-            border-bottom: 1px solid #333;
-            position: fixed;
-            width: 100%;
-            top: 40px;
-            z-index: 100;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            color: var(--parchment);
-            text-decoration: none;
-            letter-spacing: 1px;
-            font-weight: 800;
-        }
-        
-        .logo span {
-            color: var(--gold);
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .nav-btn {
-            background: transparent;
-            color: var(--parchment);
-            border: 1px solid var(--parchment);
-            padding: 0.5rem 1.5rem;
-            font-family: 'Montserrat', sans-serif;
-            text-decoration: none;
-            transition: all 0.3s;
-            cursor: pointer;
-            border-radius: 4px;
-            font-size: 0.9rem;
-        }
-
-        .nav-btn:hover {
-            background: var(--gold);
-            border-color: var(--gold);
-            color: #fff;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 8rem 5% 4rem;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            color: #fff;
-            margin-bottom: 1rem;
-            letter-spacing: -1px;
-        }
-
-        .hero p {
-            font-size: clamp(1.1rem, 2vw, 1.2rem);
-            max-width: 700px;
-            margin-bottom: 3rem;
-            color: #ccc;
-        }
-
-        .btn-primary {
-            background: var(--gold);
-            color: #fff;
-            padding: 1rem 2.5rem;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            border: none;
-            border-radius: 4px;
-            transition: transform 0.2s, background 0.2s;
-            cursor: pointer;
-        }
-
-        .btn-primary:hover {
-            background: var(--gold-dim);
-            transform: translateY(-2px);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2rem;
-            color: #fff;
-            margin-bottom: 3rem;
-        }
-
-        /* Teams Section */
-        .guilds-section {
-            padding: 5rem 5%;
-            background: #1f1f1f;
-        }
-
-        .guild-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .guild-banner {
-            padding: 2.5rem 2rem;
-            text-align: center;
-        }
-
-        .guild-banner h3 {
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-            color: var(--ink);
-        }
-
-        .guild-location {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 1.5rem;
-            display: block;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .banner-red { border-top: 4px solid var(--blood-red); }
-        .banner-blue { border-top: 4px solid var(--banner-blue); }
-        .banner-green { border-top: 4px solid var(--banner-green); }
-
-        /* Job Board */
-        .bounties {
-            padding: 5rem 5%;
-        }
-
-        .notice-board {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 3rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .bounty-scroll {
-            padding: 2rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .bounty-scroll:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-        }
-
-        .bounty-scroll h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: var(--ink);
-            border-bottom: 1px solid var(--parchment-dark);
-            padding-bottom: 0.5rem;
-        }
-
-        .reward {
-            font-weight: bold;
-            color: var(--gold-dim);
-            margin-top: 1.5rem;
-            display: block;
-            font-size: 1.1rem;
-        }
-
-        /* Application Form */
-        .ledger-section {
-            padding: 5rem 5%;
-            display: flex;
-            justify-content: center;
-            background: #1f1f1f;
-        }
-
-        .ledger-book {
-            max-width: 600px;
-            width: 100%;
-            padding: 3rem;
-        }
-
-        .ledger-book h2 {
-            text-align: center;
-            color: var(--ink);
-            margin-bottom: 1rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--ink);
-            font-size: 0.9rem;
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 0.75rem;
-            background: #fff;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            color: var(--ink);
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-        }
-
-        .form-group input:focus, .form-group select:focus {
-            outline: none;
-            border-color: var(--gold);
-        }
-
-        .submit-seal {
-            width: 100%;
-            margin-top: 1rem;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background: #111;
-            color: #666;
-            font-size: 0.9rem;
-        }
-    </style>
+    <title>PHGuilds</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-slate-900 text-white font-sans antialiased">
+    <!-- Header -->
+    <header class="p-6 flex justify-between items-center border-b border-slate-800">
+        <h1 class="text-2xl font-bold tracking-tight text-blue-400">PHGuilds</h1>
+        <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-medium transition">Get in Touch</a>
+    </header>
 
-    <div class="dev-notice">
-        NOTICE: THIS PLATFORM IS CURRENTLY UNDER DEVELOPMENT
-    </div>
-    
-    <div class="dev-watermark">
-        STAGING
-    </div>
-
-    <nav>
-        <a href="#" class="logo">PH <span>Guilds</span></a>
-        <div class="nav-links">
-            <a href="#guilds" class="nav-btn">Our Teams</a>
-            <a href="#pledge" class="nav-btn">Join Network</a>
+    <!-- Hero -->
+    <main class="max-w-4xl mx-auto py-20 px-6 text-center">
+        <h2 class="text-5xl font-extrabold mb-6" data-content-id="hero-title">Welcome to PHGuilds</h2>
+        <p class="text-xl text-slate-400 mb-10" data-content-id="hero-subtitle">A premier gaming and development community.</p>
+        
+        <div class="bg-slate-800 p-8 rounded-xl text-left border border-slate-700 mb-16 shadow-lg">
+            <h3 class="text-2xl font-semibold mb-4 text-blue-400">About Us</h3>
+            <p class="text-slate-300 leading-relaxed" data-content-id="about-text">We are a collective of developers and gamers building next-level experiences.</p>
         </div>
-    </nav>
 
-    <section class="hero">
-        <h1 data-content-id="hero-title">Connect. Build. Scale.</h1>
-        <p data-content-id="hero-subtitle">The premier network for digital professionals, software engineers, and creative strategists. Find specialized projects or join our talent pool.</p>
-        <a href="#bounties" class="btn-primary">View Open Projects</a>
-    </section>
-
-    <section id="guilds" class="guilds-section">
-        <h2 class="section-title">Our Specialized Hubs</h2>
-        <div class="guild-grid">
+        <!-- Contact Form (Web3Forms) -->
+        <section id="contact" class="bg-slate-800 p-8 rounded-xl text-left border border-slate-700 shadow-lg">
+            <h3 class="text-2xl font-semibold mb-2 text-blue-400">Contact Us</h3>
+            <p class="text-slate-400 mb-6">Reach out to us at <span data-content-id="contact-email" class="font-medium text-white">hello@phguilds.org</span> or use the form below.</p>
             
-            <div class="guild-banner parchment banner-blue">
-                <h3 data-content-id="team1-title">Web Development Division</h3>
-                <span class="guild-location" data-content-id="team1-loc">Central Visayas</span>
-                <p data-content-id="team1-desc">A dedicated team of web architects and full-stack developers. Specializing in rapid deployment and robust, scalable infrastructure.</p>
-            </div>
-
-            <div class="guild-banner parchment banner-red">
-                <h3 data-content-id="team2-title">Digital Marketing Service Seekers Guild</h3>
-                <span class="guild-location" data-content-id="team2-loc">San Roque, Tolosa</span>
-                <p data-content-id="team2-desc">A formidable network of growth strategists and media buyers. Experts in capturing digital attention and driving campaign ROI.</p>
-            </div>
-
-            <div class="guild-banner parchment banner-green">
-                <h3 data-content-id="team3-title">UI/UX & Visual Design</h3>
-                <span class="guild-location" data-content-id="team3-loc">Remote Network</span>
-                <p data-content-id="team3-desc">A creative hub of graphic designers and user experience specialists, transforming complex requirements into seamless interfaces.</p>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="bounties" class="bounties">
-        <h2 class="section-title">Active Job Board</h2>
-        <div class="notice-board wood-panel">
-            
-            <div class="bounty-scroll parchment">
-                <h3 data-content-id="job1-title">Frontend Web Developer</h3>
-                <p><strong>Department:</strong> Web Development</p>
-                <p data-content-id="job1-desc">Required to build a responsive landing page and product showcase for an e-commerce client in Cebu. Must be proficient in HTML, JS, and Tailwind CSS.</p>
-                <span class="reward" data-content-id="job1-reward">Budget: 15,000 PHP</span>
-            </div>
-
-            <div class="bounty-scroll parchment">
-                <h3 data-content-id="job2-title">Graphic Illustrator</h3>
-                <p><strong>Department:</strong> Visual Design</p>
-                <p data-content-id="job2-desc">A corporate client requires a modern brand identity refresh, including vector logos and social media marketing assets.</p>
-                <span class="reward" data-content-id="job2-reward">Budget: 8,000 PHP</span>
-            </div>
-
-            <div class="bounty-scroll parchment">
-                <h3 data-content-id="job3-title">Social Media Manager</h3>
-                <p><strong>Department:</strong> Digital Marketing</p>
-                <p data-content-id="job3-desc">Seeking a social media specialist to manage multi-channel brand communications. 3-month contract with weekly reporting requirements.</p>
-                <span class="reward" data-content-id="job3-reward">Rate: 20,000 PHP / month</span>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="pledge" class="ledger-section">
-        <div class="ledger-book parchment">
-            <h2>Join the Talent Pool</h2>
-            <p style="text-align: center; margin-bottom: 2rem;">Register below to join our network and get notified when new projects match your skills.</p>
-            
-            <form id="pledgeForm" action="https://api.web3forms.com/submit" method="POST">
+            <form action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
+                <!-- Replace with your actual Web3Forms Key -->
+                <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
                 
-                <!-- PASTE YOUR ACCESS KEY ON THE LINE BELOW -->
-                <input type="hidden" name="access_key" value="6ed36911-dbeb-4258-ab6a-405b3ad807b4">
-                
-                <input type="hidden" name="subject" value="New Guild Application - phguilds.org">
-                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-
-                <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" required placeholder="Juan Dela Cruz">
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-1">Name</label>
+                    <input type="text" name="name" required class="w-full bg-slate-900 border border-slate-700 rounded px-4 py-2 focus:outline-none focus:border-blue-500 text-white">
                 </div>
-                
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required placeholder="juan@domain.com">
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-1">Email</label>
+                    <input type="email" name="email" required class="w-full bg-slate-900 border border-slate-700 rounded px-4 py-2 focus:outline-none focus:border-blue-500 text-white">
                 </div>
-                
-                <div class="form-group">
-                    <label for="class">Primary Specialization</label>
-                    <select id="class" name="class" required>
-                        <option value="" disabled selected>Select your field...</option>
-                        <option value="code">Software Development</option>
-                        <option value="design">UI/UX & Graphic Design</option>
-                        <option value="market">Digital Marketing</option>
-                        <option value="other">Other / General Freelance</option>
-                    </select>
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-1">Message</label>
+                    <textarea name="message" required rows="4" class="w-full bg-slate-900 border border-slate-700 rounded px-4 py-2 focus:outline-none focus:border-blue-500 text-white"></textarea>
                 </div>
-
-                <button type="submit" class="btn-primary submit-seal">Submit Application</button>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded transition">Send Message</button>
             </form>
-            <p id="formStatus" style="text-align: center; margin-top: 1rem; font-weight: bold; display: none;"></p>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <footer>
-        <p>&copy; 2026 PH Guilds. Built for digital professionals.</p>
+    <footer class="text-center p-6 text-slate-500 text-sm">
+        &copy; 2026 PHGuilds. All rights reserved.
     </footer>
 
     <script>
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                const offset = 80;
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - offset;
-  
-                window.scrollTo({
-                     top: offsetPosition,
-                     behavior: "smooth"
-                });
-            });
-        });
-
-        // Web3Forms AJAX Form Submission
-        document.getElementById('pledgeForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const form = e.target;
-            const formData = new FormData(form);
-            const statusText = document.getElementById('formStatus');
-            const submitBtn = form.querySelector('button[type="submit"]');
-
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
-
-            fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                body: formData
-            })
-            .then(async (response) => {
-                let json = await response.json();
-                if (response.status == 200) {
-                    form.style.display = 'none';
-                    statusText.style.display = 'block';
-                    statusText.style.color = '#155724'; 
-                    statusText.textContent = 'Your application has been received!';
-                } else {
-                    statusText.style.display = 'block';
-                    statusText.style.color = '#dc2626'; 
-                    statusText.textContent = json.message || 'Something went wrong. Please try again.';
-                    submitBtn.textContent = 'Submit Application';
-                    submitBtn.disabled = false;
+        // Fetch content.json dynamically to populate the site
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // The ?v= timestamp prevents the browser from loading an outdated cached version
+                const res = await fetch(`content.json?v=${new Date().getTime()}`);
+                if (res.ok) {
+                    const content = await res.json();
+                    document.querySelectorAll('[data-content-id]').forEach(el => {
+                        const key = el.getAttribute('data-content-id');
+                        if (content[key]) {
+                            el.innerHTML = content[key];
+                        }
+                    });
                 }
-            })
-            .catch(error => {
-                console.log(error);
-                statusText.style.display = 'block';
-                statusText.style.color = '#dc2626';
-                statusText.textContent = 'Network error. Please try again.';
-                submitBtn.textContent = 'Submit Application';
-                submitBtn.disabled = false;
-            });
-        });
-
-        // CMS / local storage text population via cube.html
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedContent = JSON.parse(localStorage.getItem('phguilds_content'));
-            if (savedContent) {
-                document.querySelectorAll('[data-content-id]').forEach(el => {
-                    const id = el.getAttribute('data-content-id');
-                    if (savedContent[id]) {
-                        el.innerHTML = savedContent[id];
-                    }
-                });
+            } catch (err) {
+                console.log("content.json not found or error loading it. Defaulting to standard HTML text.");
             }
         });
     </script>
