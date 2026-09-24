@@ -21,13 +21,15 @@
             font-family: 'Lora', serif;
             background-color: var(--wood-dark);
             color: var(--parchment);
-            background-image: repeating-linear-gradient(
-                45deg,
-                var(--wood-dark) 0px,
-                var(--wood-dark) 10px,
-                var(--wood-light) 10px,
-                var(--wood-light) 20px
-            );
+            
+            /* Dark gradient overlay + your image */
+            background-image: 
+                linear-gradient(rgba(20, 15, 10, 0.85), rgba(20, 15, 10, 0.85)),
+                url('tavern.png'); 
+            
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Keeps the background still while scrolling */
         }
 
         h1, h2, h3 {
@@ -100,7 +102,7 @@
             pointer-events: none;
         }
         .card h2 {
-            color: #8b4513; /* Dark saddle brown for parchment text */
+            color: #8b4513;
             text-shadow: none;
             border-bottom: 2px solid #8b4513;
             padding-bottom: 0.5rem;
@@ -264,7 +266,7 @@
             });
         });
 
-        // Web3Forms AJAX Submission (Prevents redirecting away from the page)
+        // Web3Forms AJAX Submission
         const form = document.getElementById('contactForm');
         const result = document.getElementById('result-message');
 
@@ -304,10 +306,9 @@
             });
         });
 
-        // Fetch content.json dynamically to populate the site via GitHub REST API updates
+        // Fetch content.json dynamically
         document.addEventListener('DOMContentLoaded', async () => {
             try {
-                // The ?v= timestamp prevents the browser from loading an outdated cached version
                 const res = await fetch(`content.json?v=${new Date().getTime()}`);
                 if (res.ok) {
                     const content = await res.json();
