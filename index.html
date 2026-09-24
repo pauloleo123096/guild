@@ -152,7 +152,7 @@
             display: none;
         }
 
-        /* Grid for Guild Teams */
+        /* Grid for Teams */
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -171,9 +171,9 @@
 
     <nav>
         <ul>
-            <li><a href="#teams">Guild Teams</a></li>
-            <li><a href="#jobs">Quest Board</a></li>
-            <li><a href="#pledge">Join the Ranks</a></li>
+            <li><a href="#teams">Our Teams</a></li>
+            <li><a href="#jobs">Job Board</a></li>
+            <li><a href="#apply">Join Us</a></li>
         </ul>
     </nav>
 
@@ -181,45 +181,45 @@
         <!-- Hero Section -->
         <div class="hero">
             <h1 data-content-id="hero-title">Philippine Guilds: Digital Talent Hub</h1>
-            <p data-content-id="hero-desc">Forging pathways for Web Developers, Designers, and Digital Marketers across the realm.</p>
+            <p data-content-id="hero-desc">Connecting Web Developers, Designers, and Digital Marketers across the country.</p>
         </div>
 
-        <!-- Guild Teams Section -->
-        <h2 id="teams">Our Guild Specialties</h2>
+        <!-- Teams Section -->
+        <h2 id="teams">Our Core Specialties</h2>
         <div class="team-grid">
             <div class="card">
                 <h2 data-content-id="team1-title">Web Development</h2>
-                <p><strong>HQ:</strong> <span data-content-id="team1-loc">Cebu City</span></p>
-                <p data-content-id="team1-desc">Masters of code, architecture, and real-time backend systems.</p>
+                <p><strong>Location:</strong> <span data-content-id="team1-loc">Cebu City</span></p>
+                <p data-content-id="team1-desc">Experts in code, architecture, and real-time backend systems.</p>
             </div>
             
             <div class="card">
                 <h2 data-content-id="team2-title">UI / UX Design</h2>
-                <p><strong>HQ:</strong> <span data-content-id="team2-loc">Makati City</span></p>
-                <p data-content-id="team2-desc">Crafters of beautiful, intuitive interfaces for games and apps.</p>
+                <p><strong>Location:</strong> <span data-content-id="team2-loc">Makati City</span></p>
+                <p data-content-id="team2-desc">Creators of beautiful, intuitive interfaces for games and apps.</p>
             </div>
 
             <div class="card">
                 <h2 data-content-id="team3-title">Digital Marketing</h2>
-                <p><strong>HQ:</strong> <span data-content-id="team3-loc">Tacloban City</span></p>
+                <p><strong>Location:</strong> <span data-content-id="team3-loc">Tacloban City</span></p>
                 <p data-content-id="team3-desc">Strategists who amplify voices and build lasting digital presence.</p>
             </div>
         </div>
 
-        <!-- Quest Board -->
+        <!-- Job Board -->
         <div id="jobs" class="card">
-            <h2 data-content-id="jobs-title">Open Quests (Job Board)</h2>
+            <h2 data-content-id="jobs-title">Open Positions</h2>
             <div data-content-id="jobs-list">
                 <ul>
-                    <li><em>No active quests posted yet. Check back soon.</em></li>
+                    <li><em>No active positions posted yet. Check back soon.</em></li>
                 </ul>
             </div>
         </div>
 
         <!-- Web3Forms Integration -->
-        <div id="pledge" class="card">
-            <h2>Pledge Your Skills</h2>
-            <p>Ready to join a team? Submit your details to the guildmasters.</p>
+        <div id="apply" class="card">
+            <h2>Submit Your Application</h2>
+            <p>Ready to join our network? Submit your details below.</p>
             
             <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
                 <!-- Replace with your actual Web3Forms Access Key -->
@@ -236,7 +236,7 @@
 
                 <label for="specialty">Your Specialty</label>
                 <select id="specialty" name="specialty" required>
-                    <option value="" disabled selected>Select a class...</option>
+                    <option value="" disabled selected>Select a specialty...</option>
                     <option value="Web Developer">Web Developer (FastAPI, Next.js, etc.)</option>
                     <option value="Game Developer">Game Developer (Godot)</option>
                     <option value="UI/UX Designer">UI/UX Designer</option>
@@ -247,7 +247,7 @@
                 <label for="message">Message / Links to Portfolio</label>
                 <textarea id="message" name="message" rows="4" required placeholder="Tell us about your recent projects or paste your GitHub/Portfolio link."></textarea>
 
-                <button type="submit">Submit Pledge</button>
+                <button type="submit">Submit Application</button>
                 <p id="result-message"></p>
             </form>
         </div>
@@ -274,7 +274,7 @@
             const object = Object.fromEntries(formData);
             const json = JSON.stringify(object);
             
-            result.innerHTML = "Sending raven...";
+            result.innerHTML = "Sending message...";
             result.style.color = "var(--text-dark)";
 
             fetch('https://api.web3forms.com/submit', {
@@ -288,7 +288,7 @@
             .then(async (response) => {
                 let jsonResponse = await response.json();
                 if (response.status == 200) {
-                    result.innerHTML = "Pledge successfully received by the guild!";
+                    result.innerHTML = "Application successfully received!";
                     result.style.color = "green";
                     form.reset();
                 } else {
